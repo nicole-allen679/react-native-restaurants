@@ -1,38 +1,25 @@
-import SingleRestaurant from './components/SingleRestaurant'
-import React, { useState, useEffect } from 'react'
-import { TextInput } from 'react-native'
-import {
-  SafeAreaView,
-  StyleSheet,
-  ImageBackground,
-  ScrollView,
-} from 'react-native'
+import React from 'react'
+import {StyleSheet, ImageBackground} from 'react-native'
+import 'react-native-gesture-handler'
+import {NavigationContainer} from '@react-navigation/native'
+import {createStackNavigator} from '@react-navigation/stack'
+
+const Stack= createStackNavigator()
+
+import Home from './screens/Home'
+import ResDetailScreen from './screens/ResDetailScreen'
 
 export default function App() {
-  const [restaurants, setRestaurants] = useState()
-
-  useEffect(() => {
-    fetch('https://bocacode-intranet-api.web.app/restaurants')
-      .then(response => response.json())
-      .then(data => setRestaurants(data))
-      .catch(err => console.log(err))
-  }, [])
-
-  console.log(restaurants)
 
   return (
     <ImageBackground source={require('./assets/bk.jpeg')} style={{ display: 'flex', height: '100%' }}>
-      <SafeAreaView style={styles.container}>
-        <ScrollView horizontal={true}>
-          {restaurants &&
-            restaurants.map(eachRestaurant => {
-              return (
-                  <SingleRestaurant key={eachRestaurant.id} eachRestaurant={eachRestaurant.name} eachRestaurant={eachRestaurant.photoUrl} />
-              )
-            })}
-        </ScrollView>
-        <TextInput style={styles.inputFields} placeholder='Restaurant Name' />
-      </SafeAreaView>
+      <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name='Home' component={Home} />
+        <Stack.Screen name='ResDetails' component={ResDetailScreen} />
+      </Stack.Navigator>
+      </NavigationContainer>
+      {/* <Home/> */}
     </ImageBackground>
   )
 }

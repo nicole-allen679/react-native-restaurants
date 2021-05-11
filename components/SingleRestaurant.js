@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card } from 'react-native-elements'
-import { View, Text, Button, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
 
 function SingleRestaurant({eachRestaurant}) { 
@@ -15,15 +15,6 @@ function SingleRestaurant({eachRestaurant}) {
           }}
         >
           <Text style={styles.containerHeading}>{eachRestaurant.address}</Text>
-          <Button
-            buttonStyle={{
-              borderRadius: 0,
-              marginLeft: 0,
-              marginRight: 0,
-              marginBottom: 0,
-            }}
-            title="VIEW NOW"
-          />
         </Card.Image>
       </Card>
     </View>
@@ -32,6 +23,9 @@ function SingleRestaurant({eachRestaurant}) {
 
 const styles = StyleSheet.create({
     container: {
+        containerText: {
+            color: 'white',
+          },
           containerHeading: {
             color: 'white',
             fontSize: 30,
